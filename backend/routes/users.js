@@ -8,8 +8,9 @@ router.get("/", function (req, res, next) {
 });
 
 router.post("/", (req, res) => {
+  console.log(req.body);
   db.erabiltzaile_datuak.findOne(
-    { erabiltzaile: req.erabiltzaile },
+    { erabiltzaile: req.body.erabiltzaile },
     (err, docs) => {
       if (err) {
         res.send("error");
