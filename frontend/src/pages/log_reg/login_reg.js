@@ -72,17 +72,18 @@ const AuthPage = () => {
               onChange={(e) => setUsername(e.target.value)}
             />
             <input
-              type="email"
-              placeholder="Email"
-              required
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <input
               type="password"
               placeholder="Password"
               required
               onChange={(e) => setPassword(e.target.value)}
             />
+            <input
+              type="email"
+              placeholder="Email"
+              required
+              onChange={(e) => setEmail(e.target.value)}
+            />
+
             <button type="submit">Register</button>
           </form>
         )}
