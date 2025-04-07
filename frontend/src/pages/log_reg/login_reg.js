@@ -1,20 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./styles_log.css";
-import { useNavigate } from "react-router-dom";
 
 const AuthPage = () => {
   const navigate = useNavigate();
-  const [isLogin, setIsLogin] = useState(true);
+  const location = useLocation(); // To get the current path
+  const [isLogin, setIsLogin] = useState(true); // State to toggle between login/register form
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
   const [email, setEmail] = useState(null);
 
-  const handleSubmit = () => {
-    navigate("/home");
-  };
+  useEffect(() => {
+    // Set the form based on the current route
+    if (location.pathname === "/register") {
+      setIsLogin(false);
+    } else {
+      setIsLogin(true);
+    }
+  }, [location.pathname]); // Re-run the effect when the location changes
 
-  const handleRegister = () => {
-    fetch("http://localhost:3001/users", {
+  const handleRegister = (event) => {
+    // Prevent the form from submitting and causing a page reload
+    event.preventDefault();
+    fetch("http://localhost:3001/users/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -27,11 +35,30 @@ const AuthPage = () => {
         if (!response.ok) {
           throw new Error("Network response was not ok " + response.statusText);
         }
-        return response.json();
+        navigate("/home"); // Redirect to home after successful registration
       })
-      .then((data) => {
-        console.log(data);
-        navigate("/home");
+      .catch((error) => {
+        console.error("There was a problem with the fetch operation:", error);
+      });
+  };
+
+  const handleLogin = (event) => {
+    // Prevent the form from submitting and causing a page reload
+    event.preventDefault();
+
+    fetch("http://localhost:3001/users/login", {
+      method: "POST", // Changed from GET to POST for login
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        erabiltzaile: username,
+        pasahitza: password,
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok " + response.statusText);
+        }
+        navigate("/home"); // Redirect to home after successful login
       })
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);
@@ -44,22 +71,32 @@ const AuthPage = () => {
         <div className="form-toggle">
           <button
             className={isLogin ? "active" : ""}
-            onClick={() => setIsLogin(true)}
+            onClick={() => navigate("/login")} // Navigate to the login path
           >
             Login
           </button>
           <button
             className={!isLogin ? "active" : ""}
-            onClick={() => setIsLogin(false)}
+            onClick={() => navigate("/register")} // Navigate to the register path
           >
             Register
           </button>
         </div>
         {isLogin ? (
-          <form className="form" onSubmit={handleSubmit}>
+          <form className="form" onSubmit={handleLogin}>
             <h2>Login</h2>
-            <input type="text" placeholder="Username" required />
-            <input type="password" placeholder="Password" required />
+            <input
+              type="text"
+              placeholder="Username"
+              required
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              required
+              onChange={(e) => setPassword(e.target.value)}
+            />
             <button type="submit">Login</button>
           </form>
         ) : (
@@ -83,7 +120,6 @@ const AuthPage = () => {
               required
               onChange={(e) => setEmail(e.target.value)}
             />
-
             <button type="submit">Register</button>
           </form>
         )}

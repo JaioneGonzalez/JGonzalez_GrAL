@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@openreplay/tracker": "^16.1.1",
+    "rrweb": "^2.0.0-alpha.4"
+  }
+}
