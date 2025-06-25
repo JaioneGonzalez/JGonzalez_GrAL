@@ -10,7 +10,7 @@ function Home() {
     <div className="container_home">
       <h1>Web tests</h1>
       <button onClick={() => navigate("/jsonUpload")}>Record Test</button>
-      <button onClick={() => navigate("/testList")}>View Tests</button>
+      <button onClick={() => navigate("/replay")}>Replay Tests</button>
     </div>
   );
 }

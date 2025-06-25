@@ -1,0 +1,75 @@
+{
+  "events": [
+    {
+      "type": 0,
+      "data": {
+        "node": {
+          "type": 0,
+          "childNodes": [
+            {
+              "type": 1,
+              "tagName": "html",
+              "attributes": {},
+              "childNodes": [
+                {
+                  "type": 1,
+                  "tagName": "head",
+                  "attributes": {},
+                  "childNodes": []
+                },
+                {
+                  "type": 1,
+                  "tagName": "body",
+                  "attributes": {},
+                  "childNodes": [
+                    {
+                      "type": 1,
+                      "tagName": "h1",
+                      "attributes": {},
+                      "childNodes": [
+                        {
+                          "type": 3,
+                          "textContent": "Hello, rrweb!"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "source": 1
+      },
+      "timestamp": 1716810000000
+    },
+    {
+      "type": 4,
+      "data": {
+        "source": 2,
+        "text": "Hello, rrweb! Welcome."
+      },
+      "timestamp": 1716810002000
+    },
+    {
+      "type": 3,
+      "data": {
+        "x": 150,
+        "y": 200,
+        "id": 2
+      },
+      "timestamp": 1716810003000
+    },
+    {
+      "type": 2,
+      "data": {
+        "tagName": "button",
+        "id": 3,
+        "textContent": "Click me",
+        "attributes": {},
+        "isBlocked": false
+      },
+      "timestamp": 1716810004000
+    }
+  ]
+}
