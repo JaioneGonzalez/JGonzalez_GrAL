@@ -21,4 +21,5 @@ create clear, concise, documented, and readable JavaScript code.
 
 # Project context
 
-pon tu
+Backend: built with Node.js and the Express framework, serves as the core for a web application monitoring, recording and replay system. Its primary purpose is to handle user authentication and record and replay user session recordings captured by the rrweb library.
+Frontend: built with the React library, provides the user interface for a web application monitoring, recording and replay system. It enables users to interact with the backend services to record, manage and view recorded user sessions.
